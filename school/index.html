@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNest - Enterprise Management Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js for Admin Panel Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            animation: float 12s infinite alternate ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(40px, -60px) scale(1.1); }
+            100% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        .chat-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .chat-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 99px;
+        }
+    </style>
+</head>
+<body class="text-slate-900 smooth-scroll">
+
+    <!-- Background Decoration Blobs -->
+    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-200/40 blob"></div>
+    <div class="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-purple-200/40 blob"></div>
+
+    <div class="relative z-10 min-h-screen flex flex-col">
+        <!-- Navigation Bar -->
+        <nav class="w-full max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('landing')">
+                <div class="p-2.5 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-xl text-white shadow-md">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">EduNest</span>
+            </div>
+            <div id="nav-action">
+                <button onclick="showPage('auth')" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-medium hover:bg-slate-800 transition-all">
+                    Portal Login
+                </button>
+            </div>
+        </nav>
+
+        <!-- PAGE 1: LANDING PAGE -->
+        <main id="landing-page" class="w-full max-w-7xl mx-auto px-6 py-12 space-y-32">
+            <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-8">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15]">
+                        Unified Operational Hub for <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Smart Governance.</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 font-normal leading-relaxed">
+                        Track multi-class roster books across grades 1 to 10, evaluate teacher performance metrics via parent star feedback matrices, and compile unified multi-sheet Excel balance audits seamlessly.
+                    </p>
+                    <div class="pt-4 flex justify-center lg:justify-start gap-4">
+                        <button onclick="showPage('auth')" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-xl shadow-lg hover:opacity-90 transition-all">
+                            Enter Operational Portal
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="w-full max-w-[420px] h-[320px] glass-panel p-6 shadow-xl border border-white/60 flex flex-col justify-between">
+                        <div class="flex items-center space-x-2"><div class="w-3 h-3 rounded-full bg-rose-400"></div><div class="w-3 h-3 rounded-full bg-emerald-400"></div><span class="text-xs font-medium text-slate-400">registry_ledger.org</span></div>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-white/90 rounded-xl border border-slate-100 flex items-center justify-between shadow-sm">
+                                <span class="text-xs font-bold flex items-center gap-2"><i data-lucide="file-spreadsheet" class="text-emerald-600"></i> Excel Core Framework</span>
+                                <span class="text-[10px] font-mono bg-slate-900 text-white px-2 py-0.5 rounded">Active</span>
+                            </div>
+                            <div class="p-3 bg-white/90 rounded-xl border border-slate-100 flex items-center justify-between shadow-sm">
+                                <span class="text-xs font-bold flex items-center gap-2"><i data-lucide="star" class="text-amber-500 fill-amber-500"></i> Feedback Evaluation</span>
+                                <span class="text-[10px] text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">Live Metrics</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-slate-900 rounded-xl text-white text-center text-xs font-medium">System Engine Connected</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- PAGE 2: PORTAL LOGIN MODULE -->
+        <main id="auth-page" class="hidden flex-grow flex items-center justify-center px-6 py-12">
+            <div class="w-full max-w-md glass-panel p-8 shadow-2xl space-y-6">
+                <div class="text-center space-y-1">
+                    <h2 class="text-2xl font-bold tracking-tight">Institutional Gateway</h2>
+                    <p class="text-xs text-slate-400">Choose your system profile layer to proceed</p>
+                </div>
+                <div class="grid grid-cols-4 gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+                    <button id="btn-student" onclick="selectRole('student')" class="py-2 rounded-lg transition-all bg-white text-indigo-600 shadow-sm">Student</button>
+                    <button id="btn-teacher" onclick="selectRole('teacher')" class="py-2 rounded-lg transition-all text-slate-600">Teacher</button>
+                    <button id="btn-parent" onclick="selectRole('parent')" class="py-2 rounded-lg transition-all text-slate-600">Parent</button>
+                    <button id="btn-admin" onclick="selectRole('admin')" class="py-2 rounded-lg transition-all text-slate-600">Admin</button>
+                </div>
+                <form onsubmit="handleLogin(event)" class="space-y-4">
+                    <input type="hidden" id="selected-role" value="student">
+                    <div id="auth-error-banner" class="hidden p-3 bg-rose-50 border border-rose-100 rounded-xl text-xs text-rose-600 font-medium"></div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400" id="id-label">Student ID / Unique Roll</label>
+                        <input type="text" id="username-input" required placeholder="EDU-2026-09" class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Access Key / PIN</label>
+                        <input type="password" id="password-input" required placeholder="••••••••" class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all">
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-slate-900 text-white text-xs font-bold tracking-wider uppercase rounded-xl hover:bg-slate-800 transition-all">Authenticate Profile Connection</button>
+                </form>
+            </div>
+        </main>
+
+        <!-- PAGE 3: MAIN DYNAMIC CORE SESSION DASHBOARD -->
+        <main id="dashboard-page" class="hidden flex-grow w-full max-w-7xl mx-auto px-6 py-6">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-5 mb-6">
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight" id="dash-greeting">Welcome User</h1>
+                    <p class="text-xs text-slate-400" id="dash-subtext">Enterprise School Platform Ledger Workspace</p>
+                </div>
+                <span class="px-3 py-1.5 bg-indigo-50 text-indigo-700 font-bold text-xs rounded-lg uppercase tracking-wide" id="role-badge">Student Portal</span>
+            </div>
+
+            <!-- SUB-DASHBOARD BLOCK 1: STUDENT HUB -->
+            <div id="panel-student" class="hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-panel p-5 flex items-center space-x-4">
+                        <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="percent"></i></div>
+                        <div><p class="text-[10px] font-bold text-slate-400 uppercase">My Attendance Standing</p><h3 class="text-2xl font-black text-slate-900" id="student-attendance-percentage-label">--%</h3></div>
+                    </div>
+                    <div class="glass-panel p-5 flex items-center space-x-4">
+                        <div class="p-3 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="calendar"></i></div>
+                        <div><p class="text-[10px] font-bold text-slate-400 uppercase">Total Sessions Checked</p><h3 class="text-2xl font-black text-slate-900" id="student-attendance-metrics-fraction-label">0 / 0 Days</h3></div>
+                    </div>
+                </div>
+
+                <!-- FACULTY EVALUATION PANEL -->
+                <div class="glass-panel p-6 space-y-4">
+                    <div>
+                        <h3 class="font-bold text-base text-slate-900">Faculty Evaluation Panel</h3>
+                        <p class="text-xs text-slate-400">Submit anonymous performance ratings straight to administration reviews ledger</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-3">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Select Target Faculty Instructor</label>
+                            <select id="feedback-teacher-select" class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs outline-none focus:border-indigo-500 transition-all"></select>
+                            
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-slate-500 uppercase block">Assign Performance Rating Scale</label>
+                                <div class="flex items-center space-x-1.5 pt-1">
+                                    <input type="hidden" id="feedback-star-rating-score-value" value="5">
+                                    <button type="button" onclick="assignActiveStarRatingScoreValueMetric(1)" id="star-node-1" class="text-amber-400"><i data-lucide="star" class="w-5 h-5 fill-amber-400"></i></button>
+                                    <button type="button" onclick="assignActiveStarRatingScoreValueMetric(2)" id="star-node-2" class="text-amber-400"><i data-lucide="star" class="w-5 h-5 fill-amber-400"></i></button>
+                                    <button type="button" onclick="assignActiveStarRatingScoreValueMetric(3)" id="star-node-3" class="text-amber-400"><i data-lucide="star" class="w-5 h-5 fill-amber-400"></i></button>
+                                    <button type="button" onclick="assignActiveStarRatingScoreValueMetric(4)" id="star-node-4" class="text-amber-400"><i data-lucide="star" class="w-5 h-5 fill-amber-400"></i></button>
+                                    <button type="button" onclick="assignActiveStarRatingScoreValueMetric(5)" id="star-node-5" class="text-amber-400"><i data-lucide="star" class="w-5 h-5 fill-amber-400"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-between space-y-3">
+                            <div class="space-y-1">
+                                <label class="text-xs font-bold text-slate-500 uppercase">Qualitative Critique Review Comments</label>
+                                <input type="text" id="feedback-review-text" required placeholder="Provide feedback context..." class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs outline-none focus:ring-2 focus:ring-indigo-500/10 transition-all">
+                            </div>
+                            <button onclick="executeFeedbackMetricsSubmission()" class="w-full py-3 bg-slate-900 text-white text-xs font-bold tracking-wider uppercase rounded-xl hover:bg-slate-800 transition-all">Log Evaluation Matrix Record</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-DASHBOARD BLOCK 2: PARENT HUB -->
+            <div id="panel-parent" class="hidden space-y-6">
+                <div class="bg-gradient-to-r from-slate-900 to-slate-850 p-6 rounded-2xl text-white flex justify-between items-center shadow-md">
+                    <div>
+                        <h3 class="font-bold text-base text-white" id="parent-ward-name-label">Ward Profile Connected</h3>
+                        <p class="text-xs text-slate-400">Authorize actions and rate performance logs securely</p>
+                    </div>
+                    <button onclick="launchTargetParentMirrorContextView()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-xs font-bold rounded-xl transition-all shadow-md">Access Child Academic Space</button>
+                </div>
+            </div>
+
+            <!-- SUB-DASHBOARD BLOCK 3: TEACHER ENGINE HUB -->
+            <div id="panel-teacher" class="hidden space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Teacher Self Attendance -->
+                    <div class="glass-panel p-6 space-y-4">
+                        <div>
+                            <h3 class="font-bold text-base text-slate-900">Faculty Registry Check-In</h3>
+                            <p class="text-xs text-slate-400">Log daily staff token attendance directly inside the admin database ledger</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs font-bold text-slate-700" id="teacher-self-attendance-status-badge">Status: Unchecked Today</p>
+                                <p class="text-[10px] text-slate-400 font-medium mt-0.5">Timestamp verified via localized browser session</p>
+                            </div>
+                            <button id="teacher-checkin-btn" onclick="executeTeacherSelfAttendanceLog()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all shadow-sm">Mark Present</button>
+                        </div>
+                    </div>
+
+                    <!-- Multi-Class Attendance Configurator -->
+                    <div class="glass-panel p-6 space-y-4">
+                        <div>
+                            <h3 class="font-bold text-base text-slate-900">Multi-Class Roster Console</h3>
+                            <p class="text-xs text-slate-400">Select any grade level from 1 to 10 to configure rolls</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase">Target Grade Standard</label>
+                                <select id="teacher-class-select" class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs outline-none focus:border-indigo-500">
+                                    <option value="Grade 1">Class 1 Standard</option><option value="Grade 2">Class 2 Standard</option><option value="Grade 3">Class 3 Standard</option><option value="Grade 4">Class 4 Standard</option><option value="Grade 5">Class 5 Standard</option><option value="Grade 6">Class 6 Standard</option><option value="Grade 7">Class 7 Standard</option><option value="Grade 8">Class 8 Standard</option><option value="Grade 9">Class 9 Standard</option><option value="Grade 10" selected>Class 10 Standard</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="launchTargetClassAttendanceWorkspace()" class="w-full py-2.5 bg-slate-900 text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-slate-800 transition-all">Launch Class Roster</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-DASHBOARD BLOCK 4: ADMINISTRATIVE CONSOLE HUB -->
+            <div id="panel-admin" class="hidden space-y-6">
+                <!-- Administrative Master Workbook Generation Block -->
+                <div class="p-6 bg-gradient-to-r from-indigo-900 to-purple-950 text-white rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h3 class="font-bold text-lg text-white flex items-center gap-2"><i data-lucide="file-spreadsheet" class="text-emerald-400"></i> Global System Audit Workbook Engine</h3>
+                        <p class="text-xs text-indigo-200 mt-0.5">Extract full multi-tab sheets covering teacher check-ins, class attendance records, and evaluations to Excel format</p>
+                    </div>
+                    <button onclick="compileAndDownloadGlobalSystemExcelWorkbook()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2">
+                        <i data-lucide="download" class="w-4 h-4"></i> Export Combined Excel Workbook
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-panel p-5 flex items-center space-x-4 bg-white"><div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl"><i data-lucide="users-2"></i></div><div><p class="text-[10px] font-bold text-slate-400 uppercase">Total Students Registered</p><h3 class="text-2xl font-black text-slate-900" id="admin-counter-students">0</h3></div></div>
+                    <div class="glass-panel p-5 flex items-center space-x-4 bg-white"><div class="p-3 bg-purple-50 text-purple-600 rounded-xl"><i data-lucide="user-check"></i></div><div><p class="text-[10px] font-bold text-slate-400 uppercase">Staff Headcount Logs</p><h3 class="text-2xl font-black text-slate-900" id="admin-counter-teachers">0</h3></div></div>
+                    <div class="glass-panel p-5 flex items-center space-x-4 bg-white"><div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl"><i data-lucide="banknote"></i></div><div><p class="text-[10px] font-bold text-slate-400 uppercase">Total Logged Evaluations</p><h3 class="text-2xl font-black text-slate-900" id="admin-counter-evaluations">0</h3></div></div>
+                    <div class="glass-panel p-5 flex items-center space-x-4 bg-white"><div class="p-3 bg-cyan-50 text-cyan-600 rounded-xl"><i data-lucide="sparkles"></i></div><div><p class="text-[10px] font-bold text-slate-400 uppercase">Active Dynamic Base</p><h3 class="text-2xl font-black text-slate-900">100%</h3></div></div>
+                </div>
+
+                <!-- ENROLLMENT REGISTRATION CONSOLE -->
+                <div class="glass-panel p-6 space-y-4">
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900">Admissions & Staff Enrollment</h3>
+                        <p class="text-xs text-slate-500">Register new entities and instantly issue random security keys</p>
+                    </div>
+                    <form id="enrollment-form" onsubmit="executeEnrollmentRecord(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Full Legal Name</label>
+                            <input type="text" id="enroll-name" required placeholder="e.g., Dipu Mazumdar" class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-xs font-bold text-slate-500 uppercase">Operational Role & Class Allocation</label>
+                            <select id="enroll-role" class="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all">
+                                <option value="student-10">Student (Class 10 Standard)</option>
+                                <option value="student-9">Student (Class 9 Standard)</option>
+                                <option value="student-8">Student (Class 8 Standard)</option>
+                                <option value="student-7">Student (Class 7 Standard)</option>
+                                <option value="student-6">Student (Class 6 Standard)</option>
+                                <option value="student-5">Student (Class 5 Standard)</option>
+                                <option value="student-4">Student (Class 4 Standard)</option>
+                                <option value="student-3">Student (Class 3 Standard)</option>
+                                <option value="student-2">Student (Class 2 Standard)</option>
+                                <option value="student-1">Student (Class 1 Standard)</option>
+                                <option value="teacher">Faculty Teacher Account</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs tracking-wide uppercase rounded-xl transition-all shadow-md">
+                            Register & Issue Credentials
+                        </button>
+                    </form>
+                </div>
+
+                <!-- NEW COMPONENT: ADMINISTRATIVE DATABASE FULL OVERRIDE OVERVIEW & MODIFIER COMMANDER -->
+                <div class="glass-panel p-5 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-900 flex items-center gap-1.5"><i data-lucide="shield-alert" class="text-rose-500 w-4 h-4"></i> System Database Override Commander</h4>
+                            <p class="text-xs text-slate-400">Directly edit, re-assign passwords, or remove registered student and teacher records</p>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto max-h-64 chat-scroll">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50 border-b border-slate-100 text-slate-500 font-bold uppercase">
+                                <tr>
+                                    <th class="p-3">Role Layer</th>
+                                    <th class="p-3">User ID Code</th>
+                                    <th class="p-3">Display Name</th>
+                                    <th class="p-3">Access PIN</th>
+                                    <th class="p-3">Class Scope</th>
+                                    <th class="p-3 text-center">Operation Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-database-override-tbody" class="divide-y divide-slate-100 font-medium">
+                                <!-- Dynamic input mapping elements rows injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Admin Review Feedback Matrix Data Tables & Mini-Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="glass-panel p-5 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"><i data-lucide="award" class="text-purple-500 w-4 h-4"></i> Live Instructor Feedback Grid</h4>
+                        <div class="overflow-y-auto max-h-48 chat-scroll"><table class="w-full text-left text-xs"><thead class="bg-slate-50 border-b border-slate-100"><tr><th class="p-2">Target Faculty</th><th class="p-2 text-center">Score</th><th class="p-2">Critique Comment</th></tr></thead><tbody id="admin-injected-feedback-tbody" class="divide-y divide-slate-50"></tbody></table></div>
+                    </div>
+                    <div class="glass-panel p-5 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"><i data-lucide="activity" class="text-indigo-500 w-4 h-4"></i> Core Analytics Trends</h4>
+                        <div class="h-44 w-full relative"><canvas id="chart-admin-summary-vectors"></canvas></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- PAGE 4: SEPARATE COMPONENT OVERVIEW PANEL - CLASS ATTENDANCE WORKSHEET -->
+        <main id="attendance-workspace-page" class="hidden flex-grow w-full max-w-7xl mx-auto px-6 py-6 space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                <button onclick="restoreDashboardPanel()" class="inline-flex items-center space-x-2 text-xs font-bold text-indigo-600 hover:underline"><i data-lucide="arrow-left" class="w-4 h-4"></i> <span>Exit Workspace Roster</span></button>
+                <h2 class="text-lg font-black text-slate-900" id="attendance-workspace-title-header">Class Roster</h2>
+            </div>
+            <div class="glass-panel p-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead class="bg-slate-50 font-bold uppercase text-slate-500 border-b border-slate-100">
+                            <tr><th class="p-3">Unique Roll / ID</th><th class="p-3">Student Name</th><th class="p-3 text-center">Current Metric</th><th class="p-3 text-center">Mark Status</th></tr>
+                        </thead>
+                        <tbody id="attendance-workspace-tbody" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Global Footer -->
+        <footer class="w-full max-w-7xl mx-auto px-6 py-6 border-t border-slate-200/60 text-center text-[10px] font-medium text-slate-400 mt-auto">
+            &copy; 2026 EduNest System Network. Built in accordance with Excel Dynamic Workbook Compilers specifications.
+        </footer>
+    </div>
+
+    <!-- JavaScript Core Controllers Engines Scripts -->
+    <script>
+        let summaryChartInstance = null;
+        let activeSessionUserObject = null;
+
+        // 1. HARDCODED SYSTEM RECORD DATAS
+        const seedAccountsMatrix = [
+            { role: "student", uid: "EDU-2026-09", pin: "dipu123", name: "Dipu Mazumdar", grade: "Grade 10" },
+            { role: "student", uid: "EDU-2026-11", pin: "aman123", name: "Aman Verma", grade: "Grade 10" },
+            { role: "student", uid: "EDU-2026-44", pin: "rahul123", name: "Rahul Das", grade: "Grade 9" },
+            { role: "teacher", uid: "TCH-9942", pin: "teacher123", name: "Prof. Sharma", grade: "N/A" },
+            { role: "teacher", uid: "TCH-1044", pin: "math123", name: "Dr. Baruah", grade: "N/A" },
+            { role: "parent", uid: "9876543210", pin: "parent123", name: "Parent Guardian", links: "EDU-2026-09", grade: "N/A" },
+            { role: "admin", uid: "root_admin", pin: "admin123", name: "System Admin Operator", grade: "N/A" }
+        ];
+
+        const defaultStudentAttendanceLogs = [
+            { date: "2026-07-01", uid: "EDU-2026-09", name: "Dipu Mazumdar", grade: "Grade 10", status: "Present" },
+            { date: "2026-07-01", uid: "EDU-2026-11", name: "Aman Verma", grade: "Grade 10", status: "Present" },
+            { date: "2026-07-02", uid: "EDU-2026-09", name: "Dipu Mazumdar", grade: "Grade 10", status: "Present" },
+            { date: "2026-07-02", uid: "EDU-2026-11", name: "Aman Verma", grade: "Grade 10", status: "Absent" }
+        ];
+
+        const defaultTeacherAttendanceLogs = [
+            { date: "2026-07-01", uid: "TCH-9942", name: "Prof. Sharma", status: "Present", timestamp: "08:52 AM" }
+        ];
+
+        const defaultFeedbackEvaluationsLogs = [
+            { date: "2026-07-01", author: "Dipu Mazumdar", teacher: "Prof. Sharma", stars: "5", comment: "Excellent teaching structure for physics concepts." }
+        ];
+
+        if(!localStorage.getItem('EN_DB_ACCOUNTS')) localStorage.setItem('EN_DB_ACCOUNTS', JSON.stringify(seedAccountsMatrix));
+        if(!localStorage.getItem('EN_DB_ATTENDANCE_STUDENT')) localStorage.setItem('EN_DB_ATTENDANCE_STUDENT', JSON.stringify(defaultStudentAttendanceLogs));
+        if(!localStorage.getItem('EN_DB_ATTENDANCE_TEACHER')) localStorage.setItem('EN_DB_ATTENDANCE_TEACHER', JSON.stringify(defaultTeacherAttendanceLogs));
+        if(!localStorage.getItem('EN_DB_FEEDBACK')) localStorage.setItem('EN_DB_FEEDBACK', JSON.stringify(defaultFeedbackEvaluationsLogs));
+
+        lucide.createIcons();
+
+        function showPage(pageId) {
+            const sections = ['landing-page', 'auth-page', 'dashboard-page', 'attendance-workspace-page'];
+            sections.forEach(s => document.getElementById(s).classList.add('hidden'));
+            document.getElementById(`${pageId}-page`).classList.remove('hidden');
+            
+            if (pageId === 'landing' || pageId === 'auth') {
+                document.getElementById('nav-action').innerHTML = `<button onclick="showPage('auth')" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-medium hover:bg-slate-800 transition-all">Portal Login</button>`;
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectRole(role) {
+            document.getElementById('selected-role').value = role;
+            document.getElementById('auth-error-banner').classList.add('hidden');
+            const roles = ['student', 'teacher', 'parent', 'admin'];
+            const placeholders = { student: 'EDU-2026-09', teacher: 'TCH-9942', parent: '9876543210', admin: 'root_admin' };
+            
+            roles.forEach(r => document.getElementById(`btn-${r}`).className = "py-2 rounded-lg transition-all text-slate-600");
+            document.getElementById(`btn-${role}`).className = "py-2 rounded-lg transition-all bg-white text-indigo-600 shadow-sm";
+            document.getElementById('id-label').innerText = role === 'parent' ? 'Linked Primary Mobile' : (role === 'teacher' ? 'Employee Registry Number' : 'Portal ID / Username');
+            document.getElementById('username-input').placeholder = placeholders[role];
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const role = document.getElementById('selected-role').value;
+            const user = document.getElementById('username-input').value.trim();
+            const pass = document.getElementById('password-input').value.trim();
+            const banner = document.getElementById('auth-error-banner');
+
+            const accounts = JSON.parse(localStorage.getItem('EN_DB_ACCOUNTS'));
+            const match = accounts.find(a => a.role === role && a.uid === user && a.pin === pass);
+
+            if (match) {
+                banner.classList.add('hidden');
+                activeSessionUserObject = match;
+                launchDashboard(match);
+            } else {
+                banner.innerText = "Authentication Error: Access parameters mismatch. Check credentials.";
+                banner.classList.remove('hidden');
+            }
+        }
+
+        function launchDashboard(profile) {
+            showPage('dashboard');
+            document.getElementById('nav-action').innerHTML = `<button onclick="showPage('auth')" class="px-4 py-2 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all">Logout Session</button>`;
+            
+            const badge = document.getElementById('role-badge');
+            badge.innerText = `${profile.role.toUpperCase()} SPACE`;
+
+            const panels = ['student', 'teacher', 'parent', 'admin'];
+            panels.forEach(p => document.getElementById(`panel-${p}`).classList.add('hidden'));
+            document.getElementById(`panel-${profile.role}`).classList.remove('hidden');
+
+            document.getElementById('dash-greeting').innerText = `Welcome, ${profile.name}`;
+
+            if(profile.role === 'student') initializeStudentWorkspaceDashboard(profile.uid);
+            if(profile.role === 'parent') initializeParentWorkspaceDashboard(profile.links);
+            if(profile.role === 'teacher') initializeTeacherWorkspaceDashboard(profile.uid);
+            if(profile.role === 'admin') initializeAdminWorkspaceDashboard();
+            lucide.createIcons();
+        }
+
+        function restoreDashboardPanel() { showPage('dashboard'); if(activeSessionUserObject.role === 'admin') initializeAdminWorkspaceDashboard(); lucide.createIcons(); }
+
+        // STUDENT METRICS SYNC
+        function initializeStudentWorkspaceDashboard(uid) {
+            const logs = JSON.parse(localStorage.getItem('EN_DB_ATTENDANCE_STUDENT'));
+            const myLogs = logs.filter(l => l.uid === uid);
+            
+            const present = myLogs.filter(l => l.status === 'Present').length;
+            const total = myLogs.length;
+            const rate = total > 0 ? Math.round((present / total) * 100) : 100;
+
+            document.getElementById('student-attendance-percentage-label').innerText = `${rate}%`;
+            document.getElementById('student-attendance-metrics-fraction-label').innerText = `${present} / ${total} Days`;
+
+            const select = document.getElementById('feedback-teacher-select');
+            select.innerHTML = "";
+            const accounts = JSON.parse(localStorage.getItem('EN_DB_ACCOUNTS'));
+            accounts.filter(a => a.role === 'teacher').forEach(t => {
+                select.innerHTML += `<option value="${t.name}">${t.name} (Faculty Block)</option>`;
+            });
+        }
+
+        function initializeParentWorkspaceDashboard(linkedStudentUid) {
+            const accounts = JSON.parse(localStorage.getItem('EN_DB_ACCOUNTS'));
+            const student = accounts.find(a => a.uid === linkedStudentUid);
+            document.getElementById('parent-ward-name-label').innerText = `Ward Link Connection: ${student ? student.name : 'Unknown Registry'}`;
+        }
+
+        function launchTargetParentMirrorContextView() {
+            if(activeSessionUserObject && activeSessionUserObject.links) {
+                initializeStudentWorkspaceDashboard(activeSessionUserObject.links);
+                document.getElementById('panel-student').classList.remove('hidden');
+            }
+        }
+
+        // FEEDBACK SCORING
+        function assignActiveStarRatingScoreValueMetric(score) {
+            document.getElementById('feedback-star-rating-score-value').value = score;
+            for(let i=1; i<=5; i++) {
+                const node = document.getElementById(`star-node-${i}`);
+                if(i <= score) node.innerHTML = `<i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>`;
+                else node.innerHTML = `<i data-lucide="star" class="w-5 h-5 text-slate-300"></i>`;
+            }
+            lucide.createIcons();
+        }
+
+        function executeFeedbackMetricsSubmission() {
+            const targetTeacher = document.getElementById('feedback-teacher-select').value;
+            const stars = document.getElementById('feedback-star-rating-score-value').value;
+            const txt = document.getElementById('feedback-review-text').value.trim();
+
+            if(!txt) { alert("Review comment context parameter empty."); return; }
+
+            const feedbackDb = JSON.parse(localStorage.getItem('EN_DB_FEEDBACK'));
+            feedbackDb.push({
+                date: new Date().toISOString().split('T')[0],
+                author: activeSessionUserObject.name,
+                teacher: targetTeacher,
+                stars: stars,
+                comment: txt
+            });
+
+            localStorage.setItem('EN_DB_FEEDBACK', JSON.stringify(feedbackDb));
+            document.getElementById('feedback-review-text').value = "";
+            alert("Success: Performance evaluation matrix safely recorded inside admin directory ledger block!");
+        }
+
+        // TEACHER SYSTEM DASHBOARD
+        function initializeTeacherWorkspaceDashboard(uid) {
+            const logs = JSON.parse(localStorage.getItem('EN_DB_ATTENDANCE_TEACHER'));
+            const today = new Date().toISOString().split('T')[0];
+            const checked = logs.find(l => l.uid === uid && l.date === today);
+
+            const badge = document.getElementById('teacher-self-attendance-status-badge');
+            const btn = document.getElementById('teacher-checkin-btn');
+
+            if (checked) {
+                badge.innerText = `Logged Present Today at ${checked.timestamp}`;
+                btn.disabled = true; btn.className = "px-4 py-2 bg-slate-200 text-slate-400 text-xs font-bold rounded-xl cursor-not-allowed";
+            } else {
+                badge.innerText = "Status: Unchecked Today";
+                btn.disabled = false; btn.className = "px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all shadow-sm";
+            }
+        }
+
+        function executeTeacherSelfAttendanceLog() {
+            const today = new Date().toISOString().split('T')[0];
+            const nowTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            const teacherLogs = JSON.parse(localStorage.getItem('EN_DB_ATTENDANCE_TEACHER'));
+            teacherLogs.push({
+                date: today,
+                uid: activeSessionUserObject.uid,
+                name: activeSessionUserObject.name,
+                status: "Present",
+                timestamp: nowTime
+            });
+
+            localStorage.setItem('EN_DB_ATTENDANCE_TEACHER', JSON.stringify(teacherLogs));
+            initializeTeacherWorkspaceDashboard(activeSessionUserObject.uid);
+            alert("Self-attendance validated down to system workbook logs!");
+        }
+
+        function launchTargetClassAttendanceWorkspace() {
+            showPage('attendance-workspace');
+            const targetedGradeStandard = document.getElementById('teacher-class-select').value;
+            document.getElementById('attendance-workspace-title-header').innerText = `${targetedGradeStandard} Operational Roll Framework`;
+            synchronizeClassRosterTableGrid();
+        }
+
+        function synchronizeClassRosterTableGrid() {
+            const targetGrade = document.getElementById('teacher-class-select').value;
+            const tbody = document.getElementById('attendance-workspace-tbody');
+            tbody.innerHTML = "";
+
+            const accounts = JSON.parse(localStorage.getItem('EN_DB_ACCOUNTS'));
+            const students = accounts.filter(a => a.role === 'student' && a.grade === targetGrade);
+            const attendanceDb = JSON.parse(localStorage.getItem('EN_DB_ATTENDANCE_STUDENT'));
+            const today = new Date().toISOString().split('T')[0];
+
+            if(students.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-400 font-medium">No students registered in this grade bracket level yet. Go to Admin to add entries.</td></tr>`;
+                return;
+            }
+
+            students.forEach(st => {
+                const checkedLog = attendanceDb.find(l => l.uid === st.uid && l.date === today);
+                const isPresent = checkedLog ? checkedLog.status === 'Present' : false;
+                const isAbsent = checkedLog ? checkedLog.status === 'Absent' : false;
+
+                const historical = attendanceDb.filter(l => l.uid === st.uid);
+                const presentCount = historical.filter(h => h.status === 'Present').length;
+                const totalDays = historical.length;
+                const currentRatingValuePercentage = totalDays > 0 ? Math.round((presentCount / totalDays) * 100) : 100;
+
+                const row = document.createElement('tr');
+                row.className = "divide-x divide-slate-50";
+                row.innerHTML = `
+                    <td class="p-3 font-mono font-bold">${st.uid}</td>
+                    <td class="p-3 font-semibold">${st.name}</td>
+                    <td class="p-3 text-center font-bold text-indigo-600">${currentRatingValuePercentage}% tracking</td>
+                    <td class="p-3 flex justify-center gap-2">
+                        <button onclick="commitStudentAttendanceStateValueRecord('${st.uid}', '${st.name}', '${targetGrade}', 'Present')" class="px-2.5 py-1 rounded font-bold text-[10px] uppercase ${isPresent ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-emerald-50'}">Present</button>
+                        <button onclick="commitStudentAttendanceStateValueRecord('${st.uid}', '${st.name}', '${targetGrade}', 'Absent')" class="px-2.5 py-1 rounded font-bold text-[10px] uppercase ${isAbsent ? 'bg-rose-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-rose-50'}">Absent</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function commitStudentAttendanceStateValueRecord(uid, name, grade, targetStatus) {
+            const today = new Date().toISOString().split('T')[0];
+            let attendanceDb = JSON.parse(localStorage.getItem('EN_DB_ATTENDANCE_STUDENT'));
+            attendanceDb = attendanceDb.filter(l => !(l.uid === uid && l.date === today));
+            
+            attendanceDb.push({ date: today, uid: uid, name: name, grade: grade, status: targetStatus });
+            localStorage.setItem('EN_DB_ATTENDANCE_STUDENT', JSON.stringify(attendanceDb));
+            synchronizeClassRosterTableGrid();
+        }
+
+        // --- ENROLLMENT PROCESSING ENGINE ---
+        function executeEnrollmentRecord(event) {
+            event.preventDefault();
+            const fullName = document.getElementById('enroll-name').value.trim();
+            const chosenValue = document.getElementById('enroll-role').value;
+
+            if(!fullName) return;
+
+            const numericSeed = Math.floor(1000 + Math.random() * 9000);
+            let issuedUsername = "";
+            let issuedPassword = `pass${numericSeed}`;
+            let assignedGrade = "N/A";
+            let assignedRole = "teacher";
+
+            let dynamicAccountsPool = JSON.parse(localStorage.getItem('EN_DB_ACCOUNTS'));
+
+            if (chosenValue.startsWith('student')) {
+                assignedRole = "student";
+                assignedGrade = `Grade ${chosenValue.split('-')[1]}`;
+                issuedUsername = `EDU-2026-${numericSeed}`;
+                
+                dynamicAccountsPool.push({ role: "student", uid: issuedUsername, pin: issuedPassword, name: fullName, grade: assignedGrade });
+                
+                // Automatically generate parent account details linked directly to the newly registered student
+                const issuedParentMobileUsername = `9${numericSeed}54321`;
+                const issuedParentPassword = `parent${numericSeed}`;
+                dynamicAccountsPool.push({ role: "parent", uid: issuedParentMobileUsername, pin: issuedParentPassword, name: `Parent of ${fullName}`, links: issuedUsername, grade: "N/A" });
+
+                alert(`Account Registered Successfully!\n\nSTUDENT ID: ${issuedUsername} (Password: ${issuedPassword})\nPARENT MOBILE ID: ${issuedParentMobileUsername} (Password: ${issuedParentPassword})`);
+            } else {
+                issuedUsername = `TCH-${numericSeed}`;
+                dynamicAccountsPool.push({ role: "teacher", uid: issuedUsername, pin: issuedPassword, name: fullName, grade: "N/A" });
+                alert(`Faculty Teacher Account Registered Successfully!\n\nTEACHER ID: ${issuedUsername} (Password: ${issuedPassword})`);
+            }
+
+            localStorage.setItem('EN_DB_ACCOUNTS', JSON.stringify(dynamicAccountsPool));
+            document.getElementById('enroll-name').value = "";
+            initializeAdminWorkspaceDashboard();
+        }
+
+        // --- MASTER ADMIN INTERFACE CONSOLE & COMPLETE DATA EDIT DRIVER ---
+        function initializeAdminWorkspaceDashboard() {
+            const accounts = JSON.parse(localStorage.getItem('EN_DB_ACCOUNTS'));
+            const feedback = JSON.parse(localStorage.getItem('EN_DB_FEEDBACK'));
+
+            document.getElementById('admin-counter-students').innerText = accounts.filter(a => a.role === 'student').length;
+            document.getElementById('admin-counter-teachers').innerText = accounts.filter(a => a.role === 'teacher').length;
+            document.getElementById('admin-counter-evaluations').innerText = feedback.length;
+
+            // RENDER LOGGED CRITIQUE COMMENTS LIST
+            const tbodyFeedback = document.getElementById('admin-injected-feedback-tbody');
+            tbodyFeedback.innerHTML = "";
+            if(feedback.length === 0) {
+                tbodyFeedback.innerHTML = `<tr><td colspan="3" class="p-3 text-center text-slate-400">No evaluation logs loaded.</td></tr>`;
+            } else {
+                feedback.slice().reverse().forEach(fb => {
+                    tbodyFeedback.innerHTML += `<tr><td class="p-2 font-bold">${fb.teacher}</td><td class="p-2 text-center text-amber-500 font-bold">${fb.stars} ★</td><td class="p-2 text-slate-500 italic truncate max-w-[150px]">${fb.comment}</td></tr>`;
+                });
+            }
+
+            // DYNAMICALLY INJECT COMPREHENSIVE OVERRIDE MASTER MANAGER CONTROLLER FOR DATA MUTATIONS
+            const tbodyOverride = document.getElementById('admin-database-override-tbody');
+            tbodyOverride.innerHTML = "";
+
+            accounts.forEach((account, idx) => {
+                if(account.role === 'admin') return; // Skip showing root administrator profile from editing tracks for security
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50/50 transition-all";
+                tr.innerHTML = `
+                    <td class="p-3"><span class="px-2 py-0.5 font-bold text-[10px] rounded uppercase ${account.role === 'student' ? 'bg-indigo-50 text-indigo-700' : (account.role === 'teacher' ? 'bg-purple-50 text-purple-700' : 'bg-emerald-50 text-emerald-700')}">${account.role}</span></td>
+                    <td class="p-3 font-mono font-bold text-slate-500">${account.uid}</td>
+                    <td class="p-3"><input type="text" id="override-name-${idx}" value="${account.name}" class="px-2 py-1 border border-slate-200 rounded-lg text-xs w-full focus:bg-white outline-none"></td>
+                    <td class="p-3"><input type="text" id="override-pin-${idx}" value="${account.pin}" class="px-2 py-1 border border-slate-200 rounded-lg text-xs w-24 font-mono focus:bg-white outline-none"></td>
+                    <td class="p-3">
+                        ${account.role === 'student' ? `
+                            <select id="override-grade-${idx}" class="p-1 border border-slate-200 rounded text-xs bg-white">
+                                ${[1,2,3,4,5,6,7,8,9,10].map(n => `<option value="Grade ${n}" ${account.grade === 'Grade '+n ? 'selected' : ''}>Class ${n}</option>`).join('')}
+                            </select>
+                        ` : `<span class="text-slate-400">N/A</span>`}
+                    </td>
+                    <td class="p-3 text-center flex justify-center gap-2">
+                        <button onclick="commitAdminDatabaseRowMutationOverride(${idx})" class="p-1.5 bg-slate-900 hover:bg-indigo-600 text-white rounded-lg transition-all" title="Save Modifications"><i data-lucide="save" class="w-3.5 h-3.5"></i></button>
+                        <button onclick="deleteAdminDatabaseRowMutationOverride(${idx})" class="p-1.5 bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white rounded-lg transition-all" title="Remove Profile Record"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                    </td>
+                `;
+                tbodyOverride.appendChild(tr);
+            });
+
+            setTimeout(renderAdminSummaryAnalyticsVectorChartsCanvasCanvas, 50);
+            lucide.createIcons();
+        }
+
+        // SAVE MUTATED ACCOUNT CELL PARAMETERS
+        function commitAdminDatabaseRowMutationOverride(index) {
+            let accounts = JSON.parse(localStorage.getItem('EN_DB_ACCOUNTS'));
+            const targetAccount = accounts[index];
+
+            const updatedName = document.getElementById(`override-name-${index}`).value.trim();
+            const updatedPin = document.getElementById(`override-pin-${index}`).value.trim();
+
+            if(!updatedName || !updatedPin) { alert("Data parameters boundaries validation rejected: fields cannot be empty."); return; }
+
+            targetAccount.name = updatedName;
+            targetAccount.pin = updatedPin;
+
+            if(targetAccount.role === 'student') {
+                targetAccount.grade = document.getElementById(`override-grade-${index}`).value;
+            }
+
+            accounts[index] = targetAccount;
+            localStorage.setItem('EN_DB_ACCOUNTS', JSON.stringify(accounts));
+            alert(`Success: Database configuration overrides securely locked for user entry ID: ${targetAccount.uid}!`);
+            initializeAdminWorkspaceDashboard();
+        }
+
+        // DELETE ACCOUNT RECORD PIECE FROM ALL COLLECTIONS
+        function deleteAdminDatabaseRowMutationOverride(index) {
+            let accounts = JSON.parse(localStorage.getItem('EN_DB_ACCOUNTS'));
+            const targetUid = accounts[index].uid;
+
+            if(!confirm(`Warning: Are you absolutely certain you want to purge profile [${targetUid}] from the database system registries? This action is non-reversible.`)) return;
+
+            // Remove the user from accounts matrix directory pool arrays
+            accounts.splice(index, 1);
+            localStorage.setItem('EN_DB_ACCOUNTS', JSON.stringify(accounts));
+            
+            alert(`Profile user entry removed from database.`);
+            initializeAdminWorkspaceDashboard();
+        }
+
+        function renderAdminSummaryAnalyticsVectorChartsCanvasCanvas() {
+            if(summaryChartInstance) summaryChartInstance.destroy();
+            const ctx = document.getElementById('chart-admin-summary-vectors').getContext('2d');
+            const feedback = JSON.parse(localStorage.getItem('EN_DB_FEEDBACK'));
+            const avgRating = feedback.length > 0 ? (feedback.reduce((acc, curr) => acc + parseFloat(curr.stars), 0) / feedback.length).toFixed(1) : 5.0;
+
+            summaryChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Global Attendance %', 'Avg Teacher Rating (out of 5)'],
+                    allows: [94, parseFloat(avgRating) * 20],
+                    datasets: [{ data: [94, parseFloat(avgRating) * 20], backgroundColor: ['#4F46E5', '#7C3AED'], borderRadius: 8 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+        }
+
+        // --- COMBINED MULTI-SHEET EXCEL COMPILER WORKBOOK ENGINE ---
+        function compileAndDownloadGlobalSystemExcelWorkbook() {
+            const studentsAttendance = JSON.parse(localStorage.getItem('EN_DB_ATTENDANCE_STUDENT'));
+            const teachersAttendance = JSON.parse(localStorage.getItem('EN_DB_ATTENDANCE_TEACHER'));
+            const feedbackData = JSON.parse(localStorage.getItem('EN_DB_FEEDBACK'));
+
+            let excelTemplateDataString = `xml
+            <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+            <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets>
+            `;
+
+            excelTemplateDataString += `<x:ExcelWorksheet><x:Name>Student Attendance</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>`;
+            excelTemplateDataString += `<x:ExcelWorksheet><x:Name>Teacher Check-Ins</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>`;
+            excelTemplateDataString += `<x:ExcelWorksheet><x:Name>Faculty Evaluations</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>`;
+            excelTemplateDataString += `</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body>`;
+
+            excelTemplateDataString += `<table><tr style="font-weight:bold; background-color:#E2E8F0;"><td>Date Log</td><td>Student UID</td><td>Student Legal Name</td><td>Class Standard</td><td>Status Marker</td></tr>`;
+            studentsAttendance.forEach(s => { excelTemplateDataString += `<tr><td>${s.date}</td><td>${s.uid}</td><td>${s.name}</td><td>${s.grade}</td><td>${s.status}</td></tr>`; });
+            excelTemplateDataString += `</table><br><br>`;
+
+            excelTemplateDataString += `<table><tr style="font-weight:bold; background-color:#E2E8F0;"><td>Date Log</td><td>Faculty ID</td><td>Instructor Name</td><td>Status Marker</td><td>Time Checked</td></tr>`;
+            teachersAttendance.forEach(t => { excelTemplateDataString += `<tr><td>${t.date}</td><td>${t.uid}</td><td>${t.name}</td><td>${t.status}</td><td>${t.timestamp}</td></tr>`; });
+            excelTemplateDataString += `</table><br><br>`;
+
+            excelTemplateDataString += `<table><tr style="font-weight:bold; background-color:#E2E8F0;"><td>Submission Date</td><td>Author Profile</td><td>Target Instructor</td><td>Star Performance Score</td><td>Review Comments Log</td></tr>`;
+            feedbackData.forEach(f => { excelTemplateDataString += `<tr><td>${f.date}</td><td>${f.author}</td><td>${f.teacher}</td><td>${f.stars} Stars</td><td>${f.comment}</td></tr>`; });
+            excelTemplateDataString += `</table></body></html>`;
+
+            const dataBlobContainerPointer = new Blob([excelTemplateDataString], { type: "application/vnd.ms-excel" });
+            const temporaryAnchorElementNodeLink = document.createElement('a');
+            temporaryAnchorElementNodeLink.href = URL.createObjectURL(dataBlobContainerPointer);
+            temporaryAnchorElementNodeLink.download = "EduNest_Global_Operational_Audit_Workbook.xls";
+            
+            document.body.appendChild(temporaryAnchorElementNodeLink);
+            temporaryAnchorElementNodeLink.click();
+            document.body.removeChild(temporaryAnchorElementNodeLink);
+        }
+    </script>
+</body>
+</html>
